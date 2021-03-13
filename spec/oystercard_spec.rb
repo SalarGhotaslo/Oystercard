@@ -5,4 +5,8 @@ describe Oystercard do
         it 'should start with a balance of zero' do
             expect(subject.balance).to eq(0)
         end  
+        it 'should top up the oystercard by the specified amount' do
+            subject.top_up(5)
+            expect(subject.balance).to eq(5)
+        end
     end
