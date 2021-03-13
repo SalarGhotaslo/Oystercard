@@ -15,40 +15,40 @@ describe Oystercard do
       expect(subject.balance).to eq(5)
     end
     it 'should not let you have a balance over £90' do
-        maximum_balance = Oystercard::MAXIMUM_BALANCE
-        subject.top_up(maximum_balance)
-        expect{subject.top_up(1)}.to raise_error("Max balance of #{maximum_balance} reached")
-        end
-    end
-
-    describe '#Deduct' do
-        it 'should deduct money from your card by specified amount' do
-            subject.top_up(5)
-            subject.deduct(5)
-            expect(subject.balance).to eq(0)
-        end
-    end
-
-    describe '#Journey' do
-        context 'Before the user touches their oystercard in or out' do
-        it 'in_journey should respond with false' do
-        expect(subject.in_journey).to eq(false)
-            end
-        end
-        context "If the user touches the oystercard in" do
-            it 'respond with true to tell us the user is in_journey' do
-                subject.top_up(5)
-                subject.touch_in
-                expect(subject.in_journey).to eq(true) 
-            end
-         end
-         context "If the user touches the oystercard out" do
-            it 'respond with false to tell us the user is not in_journey' do
-                subject.top_up(5)
-                subject.touch_in
-                subject.touch_out
-                expect(subject.in_journey).to eq(false) 
-            end
-        end   
+      maximum_balance = Oystercard::MAXIMUM_BALANCE
+      subject.top_up(maximum_balance)
+      expect { subject.top_up(1) }.to raise_error("Max balance of #{maximum_balance} reached")
     end
   end
+
+  describe '#Deduct' do
+    it 'should deduct money from your card by specified amount' do
+      subject.top_up(5)
+      subject.deduct(5)
+      expect(subject.balance).to eq(0)
+    end
+  end
+
+  describe '#Journey' do
+    context 'Before the user touches their oystercard in or out' do
+      it 'in_journey should respond with false' do
+        expect(subject.in_journey).to eq(false)
+      end
+    end
+    context 'If the user touches the oystercard in' do
+      it 'respond with true to tell us the user is in_journey' do
+        subject.top_up(5)
+        subject.touch_in
+        expect(subject.in_journey).to eq(true)
+      end
+    end
+    context 'If the user touches the oystercard out' do
+      it 'respond with false to tell us the user is not in_journey' do
+        subject.top_up(5)
+        subject.touch_in
+        subject.touch_out
+        expect(subject.in_journey).to eq(false)
+      end
+    end
+  end
+end
