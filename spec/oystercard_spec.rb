@@ -41,6 +41,9 @@ describe Oystercard do
         subject.touch_in
         expect(subject.in_journey).to eq(true)
       end
+      it 'responds with an error if the user does not have more than £1' do
+        expect { subject.touch_in }.to raise_error('Top up your card to travel')
+      end
     end
     context 'If the user touches the oystercard out' do
       it 'respond with false to tell us the user is not in_journey' do
