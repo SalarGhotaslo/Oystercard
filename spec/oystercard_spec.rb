@@ -20,12 +20,20 @@ describe Oystercard do
         expect{subject.top_up(1)}.to raise_error("Max balance of #{maximum_balance} reached")
         end
     end
-    
+
     describe '#Deduct' do
         it 'should deduct money from your card by specified amount' do
             subject.top_up(5)
             subject.deduct(5)
             expect(subject.balance).to eq(0)
+        end
+    end
+
+    describe '#Journey' do
+        context 'Before the user touches their oystercard in or out' do
+        it 'in_journey should respond with false' do
+        expect(subject.in_journey).to eq(false)
+            end
         end
     end
   end
