@@ -35,5 +35,12 @@ describe Oystercard do
         expect(subject.in_journey).to eq(false)
             end
         end
+        context "If the user touches the oystercard in" do
+            it 'respond with true to tell us the user is in_journey' do
+                subject.top_up(5)
+                subject.touch_in
+                expect(subject.in_journey).to eq(true) 
+            end
+         end   
     end
   end
