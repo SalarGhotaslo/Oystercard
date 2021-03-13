@@ -36,7 +36,7 @@ describe Oystercard do
       end
     end
     context 'If the user touches the oystercard in' do
-      it 'respond with true to tell us the user is in_journey' do
+      it 'responds with true to tell us the user is in_journey' do
         subject.top_up(5)
         subject.touch_in
         expect(subject.in_journey).to eq(true)
@@ -46,11 +46,16 @@ describe Oystercard do
       end
     end
     context 'If the user touches the oystercard out' do
-      it 'respond with false to tell us the user is not in_journey' do
+      it 'responds with false to tell us the user is not in_journey' do
         subject.top_up(5)
         subject.touch_in
         subject.touch_out
         expect(subject.in_journey).to eq(false)
+      end
+      it 'should deduct the fare journey from the balance' do
+          subject.top_up(5)
+          subject.touch_in
+          expect { subject.touch_out }.to change{ subject.balance }.by(-Oystercard::MINIMUM_CHARGE)
       end
     end
   end
